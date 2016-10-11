@@ -39,7 +39,6 @@ namespace ensc251 {
 
         class punctuator:public StringBasedToken {
         	// ';', ':', '*', '(', ')'
-
         private:
 		std::string punctuator_variable;
 

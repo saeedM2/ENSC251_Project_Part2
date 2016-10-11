@@ -33,7 +33,6 @@ std::vector<ensc251::Token*> tokenClassifier(istream& code)
         	punctuator punctuator_variable(Tokenized_string.getStringValue( ));
 
         }
-
         tokenObjectPs.push_back(new ensc251::numeric_const<int>(1));
 
         return tokenObjectPs;
