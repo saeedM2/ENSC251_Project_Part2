@@ -5,6 +5,8 @@
 #include <iostream>
 #include <typeinfo>
 
+using namespace std;
+
 namespace ensc251 {
 
 		char *demangle(const char *typeName);
@@ -30,98 +32,82 @@ namespace ensc251 {
 			// subclasses: id, type_spec, assignment_operator, shift_operator, additive_operator, mul_operator, unary_operator, string
 		private:
 			std::string stringValue;
+
 		public:
 			//StringBasedToken() { std::cout << "Warning:  Do not invoke this constructor" << std::endl; }; // make sure this does not get invoked.
-			StringBasedToken(const std::string &aStringValue) : stringValue("") {  stringValue=aStringValue;}; // constructor
+			StringBasedToken(const std::string &aStringValue) : stringValue("") {stringValue=aStringValue;}; // constructor
 			const std::string& getStringValue( ) const { return stringValue;} // return the stringValue //getter function
 			void print(std::ostream& str) const { Token::print(str); str << stringValue; }
         };
 
-        class punctuator:public StringBasedToken {
-        	// ';', ':', '*', '(', ')'
-        private:
-		std::string punctuator_variable;
+        class punctuator:public StringBasedToken
+        {
 
         public:
-        	/*Fill in the implementation for constructor */
-		punctuator();
-
-        punctuator(std :: string value1): StringBasedToken(value1), punctuator_variable("")
-		{
-			punctuator_variable=value1;
-		};
-
-
+			punctuator(std :: string value1):StringBasedToken(value1){}
         };
 
         class id:public StringBasedToken
         {
 			// identifiers -- example:  sum
         public:
-        	/*Fill in the implementation for constructor */
+        	id(std :: string value1):StringBasedToken(value1){}
         };
 
         class type_spec:public StringBasedToken
 		{
-			// 'char' | 'int' | 'float'
         public:
-        	/*Fill in the implementation for constructor  */
+        	type_spec(std :: string value1):StringBasedToken(value1){}
 		};
 
         class assignment_operator:public StringBasedToken
 		{
-			// '=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|='
         public:
-        	/*Fill in the implementation for constructor  */
+        	assignment_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class conditional_operator:public StringBasedToken
 		{
-			// '?'
         public:
-        	/*Fill in the implementation for constructor  */
+        	conditional_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class shift_operator:public StringBasedToken
 		{
-			// '<<' | '>>'
         public:
-        	/*Fill in the implementation for constructor  */
+        	shift_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class additive_operator:public StringBasedToken
 		{
-			// '+' | '-'
         public:
-        	/*Fill in the implementation for constructor  */
+        	additive_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class div_operator:public StringBasedToken
 		{
-			// '/' | '%'
         public:
-        	/*Fill in the implementation for constructor  */
+        	div_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class unary_operator:public StringBasedToken
 		{
-			// '&' | '~'
+
         public:
-        	/*Fill in the implementation for constructor  */
+        	unary_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class postfix_operator:public StringBasedToken
 		{
-			// '++' | '--'
+
         public:
-        	/*Fill in the implementation for constructor  */
+        	 postfix_operator(std :: string value1):StringBasedToken(value1){}
 		};
 
         class string:public StringBasedToken
         {
-        	// e.g., "sample string"
         public:
-        	/*Fill in the implementation for constructor  */
+        	string(std :: string value1):StringBasedToken(value1){}
         };
 
         class incorrect:public StringBasedToken
@@ -130,6 +116,7 @@ namespace ensc251 {
         	//		(quotation mark " is missing at the end)
 		public:
 			/* Fill in the implementation for constructor. Store a warning message */
+        	incorrect(std :: string value1):StringBasedToken(value1){}
 		};
 
         template<typename T> class numeric_const;
@@ -147,11 +134,9 @@ namespace ensc251 {
         	numeric_const(const T& constValue): value(constValue) {}
         	/*Fill in for additional constructors if desired */
 
-        	const T& getValue() const { /*Fill in the implementation */ }
+        	const T& getValue() const {return value; }
         	void print(std::ostream& str) const {Token::print(str); str << ": " << value; }
 		};
-
-
 
 } // namespace ensc251
 

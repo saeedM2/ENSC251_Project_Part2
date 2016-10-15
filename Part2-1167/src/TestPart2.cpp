@@ -73,12 +73,12 @@ void check(std::string input, vector<std::string> expectedTypes)
 			else if(type=="ensc251::numeric_const<float>")
 			{
 				ensc251::numeric_const<float> *floatToken = dynamic_cast<ensc251::numeric_const<float> *>(tokenObjects.at(i));
-				ENSC251_CHECKER(floatToken->getValue(), atof(tokenValues.at(i).c_str()));
+				ENSC251_CHECKER(floatToken->getValue(), (float)atof(tokenValues.at(i).c_str()));
 			}
 			else if(type=="ensc251::numeric_const<char>")
 			{
 				ensc251::numeric_const<char> *charToken = dynamic_cast<ensc251::numeric_const<char> *>(tokenObjects.at(i));
-				ENSC251_CHECKER(charToken->getValue(), tokenValues.at(i).at(0));
+				ENSC251_CHECKER(charToken->getValue(), tokenValues.at(i).at(1));
 			}
 			else
 			{
@@ -90,7 +90,10 @@ void check(std::string input, vector<std::string> expectedTypes)
 			std::cout << "For below failure, expected tokenValue: " << tokenValues.at(i) << std::endl;
 			BOOST_CHECK_EQUAL(type, expectedTypes.at(i));
 		}
+		//I added this line of code
+		 delete tokenObjects[i];
 	}
+
 }
 
 BOOST_AUTO_TEST_CASE( test1 ){
@@ -145,6 +148,6 @@ BOOST_AUTO_TEST_CASE( test6 ){
 BOOST_AUTO_TEST_CASE( test7 ){
 	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
 	std::string input= "char* _str = \"Hello World\" ;";
-	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::unary_operator","ensc251::id", "ensc251::assignment_operator","ensc251::StringConstant","ensc251::punctuator"};
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::punctuator","ensc251::id", "ensc251::assignment_operator","ensc251::string","ensc251::punctuator"};
 	check(input, expectedTypes);
 }
