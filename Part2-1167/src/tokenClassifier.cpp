@@ -23,20 +23,10 @@ bool Check_is_unary_operator(std::string token);
 bool Check_is_postfix_operator(std::string token);
 int Check_is_numeric_const(std::string token);
 bool Check_is_string_object(std::string token);
-//ensc251::assignment_operator_spec* assignment_operator_spec(std::string token);
 
-// Construct token objects categorized into appropriate types
-// Input: a stream
-// Output: a vector containing the list of Token objects properly categorized
 std::vector<ensc251::Token*> tokenClassifier(istream& code)
 {
-
         std::vector<ensc251::Token*> tokenObjectPs;
-
-        //TODO: Write Code for classifying each token into respective classes
-        // store the pointer to the object in tokenObjectPs vector.
-        // the below line is likely wrong and will need to be updated
-
         ensc251::punctuator* punctuator_object;
         ensc251::id* id_object;
         ensc251::type_spec* type_spec_object;
@@ -52,8 +42,6 @@ std::vector<ensc251::Token*> tokenClassifier(istream& code)
         ensc251:: numeric_const<int>*numeric_const_int_object;
         ensc251:: numeric_const<float>*numeric_const_float_object;
         ensc251:: numeric_const<char>*numeric_const_char_object;
-
-        int check_constant_type=0;
 
         std::vector<std::string> tokenValues1 = tokenizeCodeStrip(code); //put code stream into a vector of strings
         for (unsigned int i=0; i< tokenValues1.size(); i++)
@@ -110,19 +98,17 @@ std::vector<ensc251::Token*> tokenClassifier(istream& code)
 			}
         	else if(Check_is_numeric_const(tokenValues1[i]) > 0)
 			{
-
-        		check_constant_type=Check_is_numeric_const(tokenValues1[i]);
-				if(check_constant_type==1)
+				if(Check_is_numeric_const(tokenValues1[i])==1)
 				{
 					numeric_const_int_object=new numeric_const<int>(std::atoi(tokenValues1[i].c_str()));
 					tokenObjectPs.push_back(new ensc251::numeric_const<int>(*numeric_const_int_object));
 				}
-				else if(check_constant_type==2)
+				else if(Check_is_numeric_const(tokenValues1[i])==2)
 				{
 					numeric_const_float_object=new numeric_const<float>(std::atof(tokenValues1[i].c_str()));
 					tokenObjectPs.push_back(new ensc251::numeric_const<float>(*numeric_const_float_object));
 				}
-				else if(check_constant_type==3)
+				else if(Check_is_numeric_const(tokenValues1[i])==3)
 				{
 					numeric_const_char_object=new numeric_const<char>(char(tokenValues1[i].at(1)));
 					tokenObjectPs.push_back(new ensc251::numeric_const<char>(*numeric_const_char_object));
@@ -134,17 +120,6 @@ std::vector<ensc251::Token*> tokenClassifier(istream& code)
 				tokenObjectPs.push_back(new ensc251::id(*id_object));
         	}
         }
-/*
-		std::cout<<endl;
-		std::cout<<type_spec_object->getStringValue()<<endl;
-		std::cout<<endl;
-
-		cout<<endl;
-        cout<<punctuator_object->getStringValue()<<endl;
-        cout<<endl;
-*/
-        //tokenObjectPs.push_back(new ensc251::numeric_const<int>(1));
-
         for(unsigned int k=0; k < tokenObjectPs.size();k++ )
         {
         	cout<<endl;
