@@ -5,8 +5,6 @@
 #include <iostream>
 #include <typeinfo>
 
-using namespace std;
-
 namespace ensc251 {
 
 		char *demangle(const char *typeName);
@@ -111,8 +109,9 @@ namespace ensc251 {
         };
 
         class incorrect:public StringBasedToken
-		{
-			// e.g., "sample string     --> This is incorrect ...
+		{	//unterminated string, unterminated char, &&, ||, [], {},
+
+        	// e.g., "sample string     --> This is incorrect ...
         	//		(quotation mark " is missing at the end)
 		public:
 			/* Fill in the implementation for constructor. Store a warning message */

@@ -151,3 +151,105 @@ BOOST_AUTO_TEST_CASE( test7 ){
 	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::punctuator","ensc251::id", "ensc251::assignment_operator","ensc251::string","ensc251::punctuator"};
 	check(input, expectedTypes);
 }
+
+BOOST_AUTO_TEST_CASE( test8 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "int a;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::id","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test9 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "int b;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::id","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test10 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "int c;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::id","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test11 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "char *e;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::punctuator","ensc251::id","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+
+BOOST_AUTO_TEST_CASE( test12 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "float g;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::id","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test13 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "a = 2;";
+	vector<std::string> expectedTypes = {"ensc251::id", "ensc251::assignment_operator","ensc251::numeric_const<int>","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test14 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "b = a ? a : 4;";
+	vector<std::string> expectedTypes = {"ensc251::id", "ensc251::assignment_operator","ensc251::id","ensc251::conditional_operator", "ensc251::id","ensc251::punctuator","ensc251::numeric_const<int>","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test15 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "c = 4 + b / (1 + a);";
+	vector<std::string> expectedTypes = {"ensc251::id", "ensc251::assignment_operator","ensc251::numeric_const<int>","ensc251::additive_operator","ensc251::id","ensc251::div_operator","ensc251::punctuator","ensc251::numeric_const<int>","ensc251::additive_operator","ensc251::id","ensc251::punctuator","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test16 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "e = \"Hello World\" \" Goodbye World\";";
+	vector<std::string> expectedTypes = {"ensc251::id","ensc251::assignment_operator", "ensc251::string","ensc251::string","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test17 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input="a <<= 2;";
+	vector<std::string> expectedTypes = {"ensc251::id","ensc251::assignment_operator", "ensc251::numeric_const<int>","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test18 ){
+	// type_spec, unary_operator, id, assignment_operator, std::string, punctuator.
+	std::string input= "float g = 1.2 + 4;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::id","ensc251::assignment_operator","ensc251::numeric_const<float>", "ensc251::additive_operator","ensc251::numeric_const<int>","ensc251::punctuator"};
+	check(input, expectedTypes);
+}
+
+BOOST_AUTO_TEST_CASE( test19 )
+{
+	std::string input= "fNameInitial = 'A ;";
+	vector<std::string> expectedTypes = {"ensc251::id","ensc251::assignment_operator", "ensc251::incorrect","ensc251::punctuator"};
+	check(input, expectedTypes);
+
+}
+
+BOOST_AUTO_TEST_CASE( test20 )
+{
+	std::string input= "float { @ ] ;";
+	vector<std::string> expectedTypes = {"ensc251::type_spec","ensc251::incorrect","ensc251::incorrect","ensc251::incorrect","ensc251::punctuator"};
+	check(input, expectedTypes);
+
+}
+
+BOOST_AUTO_TEST_CASE( test21 )
+{
+	std::string input= "fNameInitial = \"unterminated string ;";
+	vector<std::string> expectedTypes = {"ensc251::id","ensc251::assignment_operator", "ensc251::incorrect"};
+	check(input, expectedTypes);
+
+}
